@@ -1,0 +1,88 @@
+# ===================================================================
+#  MindStairs - .gitignore
+#  A comprehensive gitignore for a modern Vue 3 + Vite project.
+# ===================================================================
+
+# General
+# -------------------------------------------------------------------
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Dependencies & Build Output
+# -------------------------------------------------------------------
+# Node.js dependencies
+/node_modules
+
+# Build output folder
+/dist
+/dist-ssr
+/out
+
+# Environment Variables
+# -------------------------------------------------------------------
+# Never commit .env files containing secrets!
+# It's recommended to commit a .env.example file instead.
+.env
+.env.local
+.env.*.local
+
+# IDE & Editor Specific
+# -------------------------------------------------------------------
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains (WebStorm, IntelliJ, etc.)
+.idea
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+
+# Caching & Temporary Files
+# -------------------------------------------------------------------
+# Vite cache
+.vite
+# Older Vite versions might use .vite-cache
+.vite-cache
+
+# ESLint cache
+.eslintcache
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Temporary files
+*.tmp
+temp
+tmp
+
+# Testing
+# -------------------------------------------------------------------
+# Test coverage reports
+/coverage
+.nycrc
+
+# Cypress e2e testing
+/cypress/videos/
+/cypress/screenshots/
+/cypress/downloads/
+
+# Misc
+# -------------------------------------------------------------------
+# Optional: if you use a local SSL certificate
+*.pem
