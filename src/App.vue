@@ -221,7 +221,7 @@
           <p>{{ currentModule.description }}</p>
         </div>
         <div class="module-content">
-          <div class="module-placeholder" v-if="currentModule.id !== 'multiplication-tables' && !showMushroomMatrix">
+          <div class="module-placeholder" v-if="!isSpecialModule && !showMushroomMatrix && !showOwlSchedule && !showGemstoneSorter && !showPerimeterFence">
             <p>这里是模块 "{{ currentModule.title }}" 的学习内容</p>
             <p>实际项目中，这里会显示互动学习界面</p>
             <div class="module-demo">
@@ -237,6 +237,29 @@
             <!-- 这里将加载《种蘑菇方阵》子模块 -->
             <mushroom-matrix-module @finish-module="finishMushroomMatrix"></mushroom-matrix-module>
           </div>
+          <div class="module-specific-content" v-if="currentModule.id === 'simple-shapes' && !showOwlSchedule && !showGemstoneSorter">
+            <!-- 这里将加载认识图形模块的具体内容 -->
+            <simple-shapes-module 
+              @start-owl-schedule="showOwlSchedule = true"
+              @start-gemstone-sorter="showGemstoneSorter = true">
+            </simple-shapes-module>
+          </div>
+          <div class="module-specific-content" v-if="currentModule.id === 'simple-shapes' && showOwlSchedule">
+            <!-- 这里将加载《猫头鹰的作息》子模块 -->
+            <owl-schedule-module @finish-module="finishOwlSchedule"></owl-schedule-module>
+          </div>
+          <div class="module-specific-content" v-if="currentModule.id === 'simple-shapes' && showGemstoneSorter">
+            <!-- 这里将加载《宝石分类箱》子模块 -->
+            <gemstone-sorter-module @finish-module="finishGemstoneSorter"></gemstone-sorter-module>
+          </div>
+          <div class="module-specific-content" v-if="currentModule.id === 'perimeter' && !showPerimeterFence">
+            <!-- 这里将加载周长模块的具体内容 -->
+            <perimeter-module @start-perimeter-fence="showPerimeterFence = true"></perimeter-module>
+          </div>
+          <div class="module-specific-content" v-if="currentModule.id === 'perimeter' && showPerimeterFence">
+            <!-- 这里将加载《蚂蚁工匠的围栏》子模块 -->
+            <perimeter-fence-module @finish-module="finishPerimeterFence"></perimeter-fence-module>
+          </div>
         </div>
       </div>
     </main>
@@ -247,12 +270,22 @@
 import curriculumData from './assets/data/curriculum.js';
 import MultiplicationTablesModule from './modules/grade-2/multiplication-tables/index.vue';
 import MushroomMatrixModule from './modules/grade-2/multiplication-tables/mushroom-matrix/index.vue';
+import SimpleShapesModule from './modules/grade-1/simple-shapes/index.vue';
+import OwlScheduleModule from './modules/grade-1/simple-shapes/owl-schedule/index.vue';
+import GemstoneSorterModule from './modules/grade-1/simple-shapes/gemstone-sorter/index.vue';
+import PerimeterModule from './modules/grade-3-4/perimeter/index.vue';
+import PerimeterFenceModule from './modules/grade-3-4/perimeter/perimeter-fence/index.vue';
 
 export default {
   name: 'App',
   components: {
     MultiplicationTablesModule,
-    MushroomMatrixModule
+    MushroomMatrixModule,
+    SimpleShapesModule,
+    OwlScheduleModule,
+    GemstoneSorterModule,
+    PerimeterModule,
+    PerimeterFenceModule
   },
   data() {
     return {
@@ -260,7 +293,15 @@ export default {
       grades: curriculumData,
       selectedGrade: null,
       currentModule: null,
-      showMushroomMatrix: false
+      showMushroomMatrix: false,
+      showOwlSchedule: false,
+      showGemstoneSorter: false,
+      showPerimeterFence: false
+    }
+  },
+  computed: {
+    isSpecialModule() {
+      return ['multiplication-tables', 'simple-shapes', 'perimeter'].includes(this.currentModule.id);
     }
   },
   methods: {
@@ -273,12 +314,18 @@ export default {
       this.selectedGrade = null;
       this.currentModule = null;
       this.showMushroomMatrix = false;
+      this.showOwlSchedule = false;
+      this.showGemstoneSorter = false;
+      this.showPerimeterFence = false;
     },
     goToStarmap() {
       this.currentPage = 'starmap';
       this.selectedGrade = this.grades[0]; // 默认选择第一个年级
       this.currentModule = null;
       this.showMushroomMatrix = false;
+      this.showOwlSchedule = false;
+      this.showGemstoneSorter = false;
+      this.showPerimeterFence = false;
     },
     selectGrade(grade) {
       this.selectedGrade = grade;
@@ -288,6 +335,9 @@ export default {
       this.currentPage = 'starmap';
       this.currentModule = null;
       this.showMushroomMatrix = false;
+      this.showOwlSchedule = false;
+      this.showGemstoneSorter = false;
+      this.showPerimeterFence = false;
     },
     enterModule(module) {
       if (module.status === 'locked') {
@@ -297,6 +347,9 @@ export default {
       this.currentModule = module;
       this.currentPage = 'module';
       this.showMushroomMatrix = false;
+      this.showOwlSchedule = false;
+      this.showGemstoneSorter = false;
+      this.showPerimeterFence = false;
     },
     completeModule() {
       alert(`恭喜完成 "${this.currentModule.title}" 的学习！`);
@@ -307,6 +360,21 @@ export default {
       this.showMushroomMatrix = false;
       // 可以在这里添加完成学习后的逻辑
       alert('恭喜完成《种蘑菇方阵》的学习！');
+    },
+    finishOwlSchedule() {
+      this.showOwlSchedule = false;
+      // 可以在这里添加完成学习后的逻辑
+      alert('恭喜完成《猫头鹰的作息》的学习！');
+    },
+    finishGemstoneSorter() {
+      this.showGemstoneSorter = false;
+      // 可以在这里添加完成学习后的逻辑
+      alert('恭喜完成《宝石分类箱》的学习！');
+    },
+    finishPerimeterFence() {
+      this.showPerimeterFence = false;
+      // 可以在这里添加完成学习后的逻辑
+      alert('恭喜完成《蚂蚁工匠的围栏》的学习！');
     },
     getNodePosition(index) {
       // 计算星图节点的位置，创建蜿蜒路径效果

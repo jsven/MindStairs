@@ -24,7 +24,7 @@ export const curriculumData = [
         id: 'simple-shapes',
         title: '简单图形',
         description: '认识圆形、正方形、三角形等基本图形',
-        status: 'locked',
+        status: 'available',
         icon: '⭕'
       }
     ]
@@ -61,29 +61,29 @@ export const curriculumData = [
   {
     id: 3,
     name: '三年级',
-    description: '周长与面积、分数初识、时间概念',
-    theme: '工匠星座',
+    description: '时分秒、万以内数的认识、三位数加减法',
+    theme: '工匠作坊与美食工厂',
     modules: [
       {
-        id: 'perimeter-and-area',
-        title: '周长与面积',
-        description: '理解周长和面积的概念，学会计算方法',
-        status: 'locked',
-        icon: '📐'
-      },
-      {
-        id: 'fraction-basics',
-        title: '分数基础',
-        description: '初步认识分数，理解分数的含义',
-        status: 'locked',
-        icon: '½'
-      },
-      {
-        id: 'time-concept',
-        title: '时间概念',
-        description: '深入学习时间的读取和计算',
+        id: 'time',
+        title: '时分秒',
+        description: '学习时间单位及其换算关系',
         status: 'locked',
         icon: '⏰'
+      },
+      {
+        id: 'perimeter',
+        title: '周长',
+        description: '学习图形周长的概念和计算方法',
+        status: 'available',
+        icon: '📏'
+      },
+      {
+        id: 'area',
+        title: '面积',
+        description: '学习图形面积的概念和计算方法',
+        status: 'locked',
+        icon: '建档立'
       }
     ]
   },
@@ -173,7 +173,51 @@ export const curriculumData = [
         icon: '🔢'
       }
     ]
+  },
+  {
+    id: 7,
+    name: '七年级',
+    description: '有理数、整式加减、一元一次方程',
+    theme: '逻辑引擎与机械城市',
+    modules: [
+      {
+        id: 'rational-numbers',
+        title: '有理数',
+        description: '学习正负数、数轴、绝对值等概念',
+        status: 'available',
+        icon: '🔢'
+      },
+      {
+        id: 'polynomial-addition-subtraction',
+        title: '整式加减',
+        description: '学习同类项合并、去括号等运算',
+        status: 'locked',
+        icon: '➕'
+      },
+      {
+        id: 'linear-equations',
+        title: '一元一次方程',
+        description: '学习解一元一次方程的方法',
+        status: 'available',
+        icon: '➗'
+      },
+      {
+        id: 'parallel-lines',
+        title: '相交线与平行线',
+        description: '学习平行线的性质和判定方法',
+        status: 'available',
+        icon: '📏'
+      },
+      {
+        id: 'geometric-language',
+        title: '几何语言',
+        description: '学习几何证明的表达和逻辑推理',
+        status: 'available',
+        icon: '📝'
+      }
+    ]
   }
+
 ];
 
 export default curriculumData;
